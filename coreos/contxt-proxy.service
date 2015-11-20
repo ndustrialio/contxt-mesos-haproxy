@@ -1,0 +1,13 @@
+[Unit]
+Description=Contxt Proxy
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=/usr/bin/docker pull quay.io/ndustrialio/contxt-node-proxy
+ExecStart=/usr/bin/docker run -e "MARATHON_ADDR=10.25.13.109:8080" quay.io/ndustrialio/contxt-node-proxy
+
+[Install]
+WantedBy=multi-user.target
