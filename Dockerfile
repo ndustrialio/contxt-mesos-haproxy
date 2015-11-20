@@ -14,6 +14,6 @@ ADD crontab /var/spool/cron/crontabs/root
 RUN chmod 0600 /var/spool/cron/crontabs/root
 RUN chown root:crontab /var/spool/cron/crontabs/root
  
-CMD haproxy-marathon-bridge $MARATHON_ADDR > /usr/local/etc/haproxy/haproxy.cfg && env > /root/env.sh && crontab -l > mycron && crontab mycron && cron && tail -f /var/log/cron.log
+CMD haproxy-marathon-bridge $MARATHON_ADDR > /usr/local/etc/haproxy/haproxy.cfg && env > /root/env.sh && crontab -l > mycron && crontab mycron && cron && haproxy -db -f /usr/local/etc/haproxy/haproxy.cfg
 
 EXPOSE 10000-10100
